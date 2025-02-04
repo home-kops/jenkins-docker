@@ -1,4 +1,6 @@
-FROM jenkins/jenkins:lts
+ARG JENKINS_VERSION
+
+FROM jenkins/jenkins:${JENKINS_VERSION}
 
 USER root
 
