@@ -14,14 +14,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-     - name: Docker meta
-       id: meta
-       uses: docker/metadata-action@v5
-       with:
-         images: |
-           {{ vars.DOCKERHUB_USERNAME }}/jenkins
-         tags: |
-           type=semver,pattern={{ env.JENKINS_VERSION }}-{{version}}
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+          ${{ vars.DOCKERHUB_USERNAME }}/jenkins
+        tags: |
+          type=semver,pattern=${{ env.JENKINS_VERSION }}-{{version}}
 
     - name: Checkout repository
       uses: actions/checkout@v3
