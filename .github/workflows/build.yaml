@@ -3,7 +3,7 @@ name: Build docker image
 on:
   push:
     tags:
-    - "v*"
+    - "v*.*.*"
 
 env:
   JENKINS_VERSION: '2.496-jdk21'
