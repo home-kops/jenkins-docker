@@ -6,7 +6,7 @@ on:
     - "v*.*.*"
 
 env:
-  JENKINS_VERSION: '2.496-jdk21'
+  JENKINS_VERSION: '2.500-jdk21'
 
 jobs:
   build:
