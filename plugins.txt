@@ -1,10 +1,3 @@
-eddsa-api:0.3.0.1-19.vc432d923e5ee
-mina-sshd-api-common:2.15.0-161.vb_200831a_c15b_
-mina-sshd-api-core:2.15.0-161.vb_200831a_c15b_
-git-client:6.1.2
-git:5.7.0
-github:1.43.0
-github-branch-source:1815.v9152b_2ff7a_1b_
 ant
 antisamy-markup-formatter
 build-timeout
@@ -14,6 +7,8 @@ configuration-as-code
 credentials-binding
 dark-theme
 email-ext
+git
+github-branch-source
 gradle
 job-dsl
 kubernetes
