@@ -6,6 +6,7 @@ cloudbees-folder
 configuration-as-code
 credentials-binding
 dark-theme
+eddsa-api
 email-ext
 git
 github-branch-source
