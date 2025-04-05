@@ -1,4 +1,6 @@
-eddsa-api
+eddsa-api:0.3.0.1-19.vc432d923e5ee
+mina-sshd-api-common:2.15.0-161.vb_200831a_c15b_
+mina-sshd-api-core:2.15.0-161.vb_200831a_c15b_
 ant
 antisamy-markup-formatter
 build-timeout
