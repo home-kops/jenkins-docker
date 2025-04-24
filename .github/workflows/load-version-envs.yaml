@@ -13,7 +13,7 @@ jobs:
   load-version-envs:
     runs-on: ubuntu-latest
     outputs:
-      jenkins-version: ${{ steps.jenkins-version.outputs.firstword }}
+      jenkins-version: ${{ steps.jenkins-version.outputs.jenkins-version }}
     steps:
     - id: jenkins-version
       run: echo "jenkins-version=${{ env.JENKINS_VERSION }}" >> $GITHUB_OUTPUT
