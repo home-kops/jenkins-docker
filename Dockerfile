@@ -1,6 +1,4 @@
-ARG JENKINS_VERSION='2.496-jdk21'
-
-FROM jenkins/jenkins:${JENKINS_VERSION}
+FROM jenkins/jenkins:2.504-jdk21
 
 USER root
 

@@ -5,9 +5,6 @@ on:
     tags:
     - "v*.*.*"
 
-env:
-  JENKINS_VERSION: 2.504-jdk21
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,7 +17,7 @@ jobs:
         images: |
           ${{ vars.DOCKERHUB_USERNAME }}/jenkins
         tags: |
-          type=semver,pattern=${{ env.JENKINS_VERSION }}-{{version}}
+          type=semver,pattern={{version}}
 
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -44,4 +41,3 @@ jobs:
         context: .
         push: true
         tags: ${{ steps.meta.outputs.tags }}
-        build-args: JENKINS_VERSION=${{ env.JENKINS_VERSION }}
