@@ -20,6 +20,11 @@ jobs:
         echo "Author email: ${{ github.event.head_commit.author.email }}"
         echo "Jenkins version: ${{ needs.load-version-envs.outputs.jenkins-version }}"
 
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-tags: 'true'
+
     - name: Get the last tag
       id: last_tag
       run: |
