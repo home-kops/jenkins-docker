@@ -1,0 +1,16 @@
+name: Create tag if renovate pushed a commit
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Store commit author
+      id: commit_author
+      run: |
+        echo "Commit author: ${{ github.event.head_commit.author.name }}"
+        echo "Author email: ${{ github.event.head_commit.author.email }}"
