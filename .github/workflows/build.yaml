@@ -5,10 +5,10 @@ on:
     tags:
     - "v*.*.*"
 
-env:
-  JENKINS_VERSION: '2.504-jdk21'
-
 jobs:
+  load-env:
+    uses: ./.github/workflows/envs-workflow.yaml
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +19,7 @@ jobs:
         images: |
           ${{ vars.DOCKERHUB_USERNAME }}/jenkins
         tags: |
-          type=semver,pattern=${{ env.JENKINS_VERSION }}-{{version}}
+          type=semver,pattern=${{ load-env.outputs.jenkins-version }}-{{version}}
 
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -43,4 +43,4 @@ jobs:
         context: .
         push: true
         tags: ${{ steps.meta.outputs.tags }}
-        build-args: JENKINS_VERSION=${{ env.JENKINS_VERSION }}
+        build-args: JENKINS_VERSION=${{ load-env.outputs.jenkins-version }}

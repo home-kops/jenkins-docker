@@ -1,0 +1,17 @@
+name: Workflow to load env variables
+
+on:
+  workflow_call:
+    outputs:
+      jenkins-version:
+        value: ${{ env.JENKINS_VERSION }}
+    inputs: {}
+
+env:
+  JENKINS_VERSION: 2.504-jdk21
+
+jobs:
+  dummy:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Loading env variables"

@@ -6,7 +6,10 @@ on:
     - main
 
 jobs:
-  build:
+  load-env:
+    uses: ./.github/workflows/envs-workflow.yaml
+
+  tag:
     runs-on: ubuntu-latest
     steps:
     - name: Store commit author
@@ -14,3 +17,11 @@ jobs:
       run: |
         echo "Commit author: ${{ github.event.head_commit.author.name }}"
         echo "Author email: ${{ github.event.head_commit.author.email }}"
+        echo "Jenkins version: ${{ load-env.outputs.jenkins-version }}"
+
+    - name: Get the last tag
+      id: last_tag
+      run: |
+        last_tag=$(git describe --tags --abbrev=0 || echo "${{ load-env.outputs.jenkins-version }}-v0.0.0")
+        echo "Last tag: $last_tag"
+        echo "last_tag=$last_tag" >> $GITHUB_OUTPUT
