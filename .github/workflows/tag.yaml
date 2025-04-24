@@ -6,28 +6,29 @@ on:
     - main
 
 jobs:
-  load-version-envs:
-    uses: ./.github/workflows/load-version-envs.yaml
-
   tag:
     runs-on: ubuntu-latest
-    needs: load-version-envs
     steps:
-    - name: Store commit author
-      id: commit_author
-      run: |
-        echo "Commit author: ${{ github.event.head_commit.author.name }}"
-        echo "Author email: ${{ github.event.head_commit.author.email }}"
-        echo "Jenkins version: ${{ needs.load-version-envs.outputs.jenkins-version }}"
-
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        fetch-tags: 'true'
+        fetch-depth: 0
+        fetch-tags: true
 
     - name: Get the last tag
-      id: last_tag
+      id: get-last-tag
       run: |
-        last_tag=$(git describe --tags --abbrev=0 || echo "${{ needs.load-version-envs.outputs.jenkins-version }}-v0.0.0")
-        echo "Last tag: $last_tag"
-        echo "last_tag=$last_tag" >> $GITHUB_OUTPUT
+        ${{ github.event.head_commit.author.name }}
+        last_tag=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+        echo "Last tag: ${last_tag}"
+        echo "tag=${last_tag}" >> ${GITHUB_OUTPUT}
+
+    - name: Create new patch version
+      if: github.event.head_commit.author.name == 'renovate-bot'
+      run: |
+        tag="$(awk -F. '/[0-9]+\./{$NF+=1;print}' OFS=. <<< "${{ steps.get-last-tag.outputs.tag }}")"
+
+        git tag "${tag}"
+        git push origin "${tag}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
