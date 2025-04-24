@@ -6,11 +6,12 @@ on:
     - "v*.*.*"
 
 jobs:
-  load-env:
+  load-version-envs:
     uses: ./.github/workflows/envs-workflow.yaml
 
   build:
     runs-on: ubuntu-latest
+    needs: load-version-envs
     steps:
     - name: Docker meta
       id: meta
@@ -19,7 +20,7 @@ jobs:
         images: |
           ${{ vars.DOCKERHUB_USERNAME }}/jenkins
         tags: |
-          type=semver,pattern=${{ load-env.outputs.jenkins-version }}-{{version}}
+          type=semver,pattern=${{ needs.load-version-envs.outputs.jenkins-version }}-{{version}}
 
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -43,4 +44,4 @@ jobs:
         context: .
         push: true
         tags: ${{ steps.meta.outputs.tags }}
-        build-args: JENKINS_VERSION=${{ load-env.outputs.jenkins-version }}
+        build-args: JENKINS_VERSION=${{ needs.load-version-envs.outputs.jenkins-version }}

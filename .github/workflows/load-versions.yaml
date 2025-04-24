@@ -5,13 +5,12 @@ on:
     outputs:
       jenkins-version:
         value: ${{ env.JENKINS_VERSION }}
-    inputs: {}
 
 env:
   JENKINS_VERSION: 2.504-jdk21
 
 jobs:
-  dummy:
+  load-version-envs:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "Loading env variables"
+    - run: echo "Loading version env variables"
