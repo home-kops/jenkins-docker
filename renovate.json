@@ -1,10 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "automerge": true,
   "packageRules": [
     {
-      "description": "Automerge non-major updates",
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+	    "depTypeList": ["dependencies"],
+	    "updateTypes": ["major"],
+      "automerge": false
     }
   ]
 }
