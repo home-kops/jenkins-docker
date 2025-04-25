@@ -5,6 +5,10 @@ on:
     branches:
     - main
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,7 +26,7 @@ jobs:
         should_build="$(grep -E "^\[build\].*" <<< "${commit_message}" || true)"
 
         if [[ -z "${should_build}" ]]; then
-          co_author="$(git log --format="%(trailers:key=Co-authored-by)")"
+          co_author="$(git log -1 --format="%(trailers:key=Co-authored-by)")"
           should_build="$(grep "Renovate Bot" <<< "${co_author}" || true)"
         fi
 
