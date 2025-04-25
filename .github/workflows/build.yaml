@@ -22,7 +22,8 @@ jobs:
         should_build="$(grep -E "^\[build\].*" <<< "${commit_message}" || true)"
 
         if [[ -z "${should_build}" ]]; then
-          should_build="$(grep "Renovate Bot" <<< git log --format="%(trailers:key=Co-authored-by)" || true)"
+          co_author="$(git log --format="%(trailers:key=Co-authored-by)")"
+          should_build="$(grep "Renovate Bot" <<< "${co_author}" || true)"
         fi
 
         if [[ "${should_build}" ]]; then
