@@ -19,6 +19,7 @@ matrix-auth
 pam-auth
 pipeline-github-lib
 pipeline-graph-view
+scm-filter-branch-pr
 ssh-slaves
 timestamper
 workflow-aggregator
