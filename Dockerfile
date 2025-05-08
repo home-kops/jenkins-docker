@@ -5,10 +5,10 @@ USER root
 RUN mkdir -p /jenkins && chown -R jenkins:jenkins /jenkins
 
 # Install zrok
-RUN curl -sSf https://get.openziti.io/install.bash | bash -s zrok
+# RUN curl -sSf https://get.openziti.io/install.bash | bash -s zrok
 
 # Install zrok agent
-RUN apt install zrok-agent
+# RUN apt install zrok-agent
 
 USER jenkins
 
